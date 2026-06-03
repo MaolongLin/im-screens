@@ -101,10 +101,9 @@ These are intentionally rough - we'll turn the agreed ones into proper tasks lat
 
 ---
 
-## Notes for Tuesday's brainstorm with John
+## Notes for Tuesday's brainstorm with John Henry
 
 - Confirm the priority order: facelift first, series first, or in parallel?
 - Decide how ambitious the series model should be (hard-coded lists vs. data-driven/editable).
-- Identify which new series we can source enough quality videos for in time for June.
 - Align moLib versions between the two pages while we're in here (0.2.3 vs 0.2.4 - see
   [`src/qrcode/README.md`](src/qrcode/README.md)).
