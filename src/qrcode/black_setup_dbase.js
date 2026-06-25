@@ -7,6 +7,8 @@ async function black_setup_dbase() {
   observe_meta();
 
   observe_comment_store();
+
+  footer_style(); // Apply custom footer style after dbase_app_init
 }
 
 function observe_meta() {
@@ -104,4 +106,14 @@ function ui_error(...args) {
   // enter blackfacts ui_error
   ui_log(...args);
   alert(...args);
+}
+function footer_style() {
+  const t = setInterval(() => {
+    if (my.footerElement) {
+      clearInterval(t);
+      my.footerElement.classList.add("custom-footer");
+      my.footerElement.style.backgroundColor = "";
+      my.footerElement.style.color = "";
+    }
+  }, 50);
 }

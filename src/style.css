@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   /* background-color: #fff; */
-  background-color: #000;
+  background-color: white;
   /* overflow: hidden; */
 }
 
@@ -70,4 +70,8 @@ a {
 
 * {
   font-family: monospace;
+}
+.custom-footer {
+  background-color: white !important;
+  color: #000 !important;
 }
