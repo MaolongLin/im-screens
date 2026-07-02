@@ -12,10 +12,26 @@ a {
 
 #id_player {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 20px;
+  left: 40px;
+  width: calc(100% - 80px);
   height: 65%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #f8f8f8;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding-top: 10px;
+}
+
+@media (max-width: 600px) {
+  #id_player {
+    left: 0;
+    width: 100%;
+    top: 10px;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: 0;
+  }
 }
 
 #id_qrcode {
@@ -33,6 +49,8 @@ a {
 }
 
 #id_message_pane {
+  top: 10px;
+  left: 45px;
   z-index: 3;
   position: absolute;
   color: #fff;
@@ -69,9 +87,26 @@ a {
 }
 
 * {
-  font-family: monospace;
+  font-family: Grenze;
 }
 .custom-footer {
   background-color: white !important;
   color: #000 !important;
+}
+
+#id_button_july_theme {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b91c1c 0%, #ffffff 50%, #1d4ed8 100%);
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+#id_button_july_theme:active {
+  transform: translateY(1px);
 }

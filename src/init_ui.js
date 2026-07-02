@@ -41,6 +41,45 @@ function create_controlled_view() {
   //
   id_dashboard.classList.add('hidden');
   // show_qrcode_top_right();
+  create_july_theme_button();
+}
+
+function create_july_theme_button() {
+  if (document.getElementById('id_button_july_theme')) {
+    return;
+  }
+
+  const button = document.createElement('button');
+  button.id = 'id_button_july_theme';
+  button.innerHTML = 'July_theme';
+  button.addEventListener('click', function () {
+    apply_july_theme_background();
+  });
+
+  document.body.appendChild(button);
+  position_july_theme_button(button);
+
+  if (!my.julyThemeButtonResizeBound) {
+    my.julyThemeButtonResizeBound = true;
+    window.addEventListener('resize', function () {
+      position_july_theme_button(button);
+    });
+  }
+}
+
+function position_july_theme_button(button) {
+  let top = Math.max(12, Math.round(window.innerHeight * 0.69) - 10);
+  button.style.position = 'absolute';
+  button.style.left = '45px';
+  button.style.top = top + 'px';
+  button.style.zIndex = '10';
+}
+
+function apply_july_theme_background() {
+  document.body.style.backgroundImage = 'linear-gradient(135deg, #b91c1c 0%, #ffffff 50%, #1d4ed8 100%)';
+  document.body.style.backgroundRepeat = 'no-repeat';
+  document.body.style.backgroundAttachment = 'fixed';
+  document.body.style.backgroundSize = 'cover';
 }
 
 // function show_qrcode_top_right() {
