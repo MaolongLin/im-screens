@@ -1,6 +1,7 @@
 //
 
 let my = {};
+let videoData = {};
 
 // console.log('BlackFacts index.js');
 
@@ -9,8 +10,10 @@ document.addEventListener('DOMContentLoaded', document_loaded);
 
 // window.addEventListener('resize', position_bottom);
 
-function document_loaded() {
+async function document_loaded() {
   // console.log('document_loaded');
+  // Load series/videos data once at startup
+  await load_video_json();
 
   my_setup();
 
@@ -28,6 +31,22 @@ function document_loaded() {
   }
 
   setup_animationFrame();
+}
+
+// Fetch videos.json and populate videoData once
+async function load_video_json() {
+  try {
+    const response = await fetch('./videos.json');
+    if (!response.ok) {
+      console.log('load_video_json bad response', response.status);
+      videoData = {};
+      return;
+    }
+    videoData = await response.json();
+  } catch (error) {
+    console.log('load_video_json error', error);
+    videoData = {};
+  }
 }
 
 function update_blackfacts_index_dbase(blackfacts_index) {

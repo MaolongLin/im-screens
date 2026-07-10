@@ -34,6 +34,8 @@ function create_remote_view() {
   // id_bottom_message_pane.classList.add('hidden');
   // qrcode_hide();
   create_index_buttons();
+  // Initialize Series buttons from videoData
+  create_series_buttons();
 }
 
 function create_controlled_view() {
@@ -132,6 +134,65 @@ function create_index_buttons() {
   }
   // Buttons begin hidden
   toggle_365_panes();
+}
+
+// Create series selector buttons from videoData.series
+function create_series_buttons() {
+  let button_host = id_series_button_container;
+  if (!button_host) {
+    return;
+  }
+  button_host.innerHTML = '';
+
+  let seriesMap = (videoData && videoData.series) || {};
+  let keys = Object.keys(seriesMap);
+  for (let i = 0; i < keys.length; i++) {
+    let key = keys[i];
+    let series = seriesMap[key] || {};
+    const elt = document.createElement('button');
+    elt.innerHTML = series.title || key;
+    elt.addEventListener('click', function () {
+      update_series(key);
+    });
+    button_host.appendChild(elt);
+  }
+}
+
+// Show selected series title and create video buttons
+function update_series(key) {
+  let seriesMap = (videoData && videoData.series) || {};
+  let series = seriesMap[key];
+  if (!series) {
+    return;
+  }
+
+  id_series_title.innerHTML = series.title || key;
+
+  create_series_video_buttons(key);
+}
+
+// Create video buttons for the selected series
+function create_series_video_buttons(key) {
+  let button_host = id_series_video_button_container;
+  if (!button_host) {
+    return;
+  }
+  button_host.innerHTML = '';
+
+  let videosBySeries = (videoData && videoData.videos) || {};
+  let videos = videosBySeries[key] || [];
+  for (let i = 0; i < videos.length; i++) {
+    let video = videos[i] || {};
+    const elt = document.createElement('button');
+    elt.innerHTML = video.title || ('Video ' + (i + 1));
+    elt.addEventListener('click', function () {
+      if (!video.videoId || !player_ready()) {
+        return;
+      }
+      player.cueVideoById(video.videoId);
+    });
+    button_host.appendChild(elt);
+  }
 }
 
 // function qrcode_hide() {

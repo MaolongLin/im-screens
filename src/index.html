@@ -38,12 +38,16 @@
         <input id="id_date" type="date" />
       </label>
       <br />
-      <button id="id_button_toggle_buttons">Toggle Buttons</button>
+      <button id="id_button_toggle_buttons">Toggle Buttons</button>       <!-- Toggle Series button for mutually exclusive display -->      <button id="id_button_toggle_series">Toggle Series</button>
       <br />
       <span id="id_lapse_report"></span>
       <br />
       <h2 id="id_blackfacts_num"></h2>
-      <div id="id_index_button_container" class="hidden"></div>
+      <div id="id_index_button_container" class="hidden"></div>       <!-- Series UI: starts hidden, mutually exclusive with 365 buttons -->      <div id="id_series_button_container" class="hidden"></div>
+      <div id="id_series_detail" class="hidden">
+        <h2 id="id_series_title"></h2>
+      </div>
+      <div id="id_series_video_button_container" class="hidden"></div>
       <div>
         <h3>
           An experimental interactive multi-screen experience <br />

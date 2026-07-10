@@ -10,11 +10,19 @@ a {
   color: #fff;
 }
 
+/*
+  #id_player
+  - Main player container styling added to give visual breathing room.
+  - Uses absolute positioning with top/left offsets to leave space on the sides and above.
+  - width is calculated to subtract left/right gaps so the element stays centered with equal margins.
+  - box-sizing: border-box ensures padding/borders are included in the width/height calculations.
+  - Rounded corners, subtle background and shadow improve visual appearance on larger screens.
+*/
 #id_player {
   position: absolute;
-  top: 20px;
-  left: 40px;
-  width: calc(100% - 80px);
+  top: 20px; /* space above the player */
+  left: 40px; /* left margin to balance right margin */
+  width: calc(100% - 80px); /* subtract left+right margins (40px each) */
   height: 65%;
   box-sizing: border-box;
   border-radius: 12px;
@@ -23,6 +31,11 @@ a {
   padding-top: 10px;
 }
 
+/*
+  Responsive behavior for small screens (mobile):
+  - Remove side gaps and use full width so the player fits the viewport.
+  - Simplify visual decorations (no shadow, no rounded corners) for a cleaner mobile layout.
+*/
 @media (max-width: 600px) {
   #id_player {
     left: 0;

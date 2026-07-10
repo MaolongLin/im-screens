@@ -15,6 +15,7 @@ id_button_youtube.addEventListener('click', youtube_action);
 
 id_date.addEventListener('input', date_input_action, false);
 id_button_toggle_buttons.addEventListener('click', toggle_buttons_action);
+id_button_toggle_series.addEventListener('click', toggle_series_action);
 // id_button_library.addEventListener('click', library_action);
 
 // id_button_play.addEventListener('click', play_action);
@@ -113,18 +114,63 @@ function library_action() {
 }
 
 // id_button_toggle_buttons
+// Toggle 365 buttons; close Series if opening 365 (mutually exclusive)
 function toggle_buttons_action() {
   console.log('toggle_buttons_action');
-  toggle_365_panes();
+  let willShow365 = id_index_button_container.classList.contains('hidden');
+  set_365_visible(willShow365);
+  if (willShow365) {
+    set_series_visible(false);
+  }
+  sync_shared_panel_visibility();
   let vis = id_index_button_container.classList.contains('hidden');
   // id_button_toggle_buttons.innerHTML = vis ? 'Show 365' : 'Hide 365';
 }
 
+// Toggle Series buttons; close 365 if opening Series (mutually exclusive)
+function toggle_series_action() {
+  console.log('toggle_series_action');
+  let willShowSeries = id_series_button_container.classList.contains('hidden');
+  set_series_visible(willShowSeries);
+  if (willShowSeries) {
+    set_365_visible(false);
+  }
+  sync_shared_panel_visibility();
+}
+
 function toggle_365_panes() {
-  id_index_button_container.classList.toggle('hidden');
+  let willShow365 = id_index_button_container.classList.contains('hidden');
+  set_365_visible(willShow365);
   // id_player.classList.toggle('hidden');
-  id_blackfacts_num.classList.toggle('hidden');
-  id_message_text.classList.toggle('hidden');
+  sync_shared_panel_visibility();
+}
+
+function toggle_series_panes() {
+  let willShowSeries = id_series_button_container.classList.contains('hidden');
+  set_series_visible(willShowSeries);
+  sync_shared_panel_visibility();
+}
+
+// Helper: Show or hide 365 panel
+function set_365_visible(visible) {
+  id_index_button_container.classList.toggle('hidden', !visible);
+}
+
+// Helper: Show or hide Series panel
+function set_series_visible(visible) {
+  id_series_button_container.classList.toggle('hidden', !visible);
+  id_series_detail.classList.toggle('hidden', !visible);
+  id_series_video_button_container.classList.toggle('hidden', !visible);
+}
+
+// Sync shared element visibility: hide title when either 365 or Series is open
+function sync_shared_panel_visibility() {
+  let is365Visible = !id_index_button_container.classList.contains('hidden');
+  let isSeriesVisible = !id_series_button_container.classList.contains('hidden');
+  let hideBlackfactsNum = is365Visible || isSeriesVisible;
+
+  id_blackfacts_num.classList.toggle('hidden', hideBlackfactsNum);
+  id_message_text.classList.toggle('hidden', is365Visible);
 }
 
 function play_clip_action() {
