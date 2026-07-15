@@ -33,25 +33,30 @@ function show_comments() {
   let items = [];
   for (let prop in my.comment_store) {
     let entry = my.comment_store[prop];
-    items.push(`<li>${entry.name}: ${entry.comment}</li>`);
+    let li = document.createElement('li');
+    li.textContent = entry.name + ': ' + entry.comment;
+    items.push(li);
   }
   items.reverse();
-  id_comments_ol.innerHTML = items.join('');
+  id_comments_ol.innerHTML = '';
+  for (let i = 0; i < items.length; i++) {
+    id_comments_ol.appendChild(items[i]);
+  }
 }
 
-function add_click_action() {
-  add_action();
+async function add_click_action() {
+  await add_action();
   id_name.value = '';
   id_comment.value = '';
 }
 
-function enter_click_action(event) {
+async function enter_click_action(event) {
   // console.log('enter_click_action event.target', event.target);
   // console.log('id_link.href', id_link.href);
   // console.log('id_name', id_name.value);
   // console.log('id_comment', id_comment.value);
 
-  add_click_action();
+  await add_click_action();
 
   window.location = id_link.href;
   // !!@ Fails in WebView iOS app

@@ -32,6 +32,10 @@ function youtube_action() {
   console.log('youtube_action');
   let index = my.blackfacts_index;
   let entry = dateFactForIndex(index);
+  if (!entry || !entry.videoKey) {
+    console.log('youtube_action missing entry', index, entry);
+    return;
+  }
   let href = 'https://www.youtube.com/watch?v=' + entry.videoKey;
   // window.location.href = href;
   window.open(href, '_blank');
@@ -67,7 +71,9 @@ function dashboard_action(event) {
   } else {
     console.log('dashboard_action other', target);
   }
-  player.playVideo();
+  if (player_ready()) {
+    player.playVideo();
+  }
   update_blackfacts_num_ui();
 }
 

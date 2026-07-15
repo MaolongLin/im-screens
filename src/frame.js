@@ -35,6 +35,7 @@ function animationFrame_callback(timeStamp) {
 
   if (
     my.video_index_was_played != null && //
+    player_ready() &&
     player.getPlayerState() != YT.PlayerState.PLAYING &&
     timeSecs > 5.0
   ) {
@@ -79,9 +80,12 @@ function animationFrame_callback(timeStamp) {
 }
 
 function show_message_status(timeSecs) {
-  if (!timeSecs) timeSecs = '';
+  let timeLabel = '';
+  if (typeof timeSecs == 'number') {
+    timeLabel = timeSecs.toFixed(2);
+  }
   if (!my.blackfacts_player_inited) {
-    let str = 'Waiting for video ' + timeSecs.toFixed(2);
+    let str = 'Waiting for video ' + timeLabel;
     if (my.stalled_report) {
       str += ' reload pending';
     }
